@@ -1,0 +1,1 @@
+export const DB_NAME = "videotube" // application database name hence we kept in constant it is not that sensitive so we not keep it in .env although we can put this there as well
