@@ -33,9 +33,15 @@ dotenv.config({
 connectDB(() => {
   app.listen(process.env.PORT || 9000, () => {
     console.log(`Server is Running at port: ${process.env.PORT}`);
-  });
+  
+});
+
 })
-  .then()
+  .then(
+  )
   .catch((err) => {
+  
     console.log(`MongoDB Connection Failed!! ${err}`);
+       process.exit(1) // access of process is given by nodeJS. whatever process our current application is running on it's reference is given by this.
+     // there are various types of exit codes 
   });

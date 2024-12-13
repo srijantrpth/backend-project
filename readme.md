@@ -17,3 +17,5 @@ Points to Note: Professional Approach
 After running npm run dev if there is any issue connecting to DB such as with import statements etc check all the import statements first and make sure to include extensions of files as well such as .js
 
 We use app.use when doing some configuraitons or doing middleware settings        
+
+JWT is a Bearer Token
