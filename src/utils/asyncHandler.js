@@ -1,6 +1,6 @@
 const asyncHandler = (requestHandler) => {
  // we can put anything in place of requestHandler we can put fn as well or anything this is just for readability
- (req,res,next)=>{
+   return (req,res,next)=>{
     Promise.resolve(requestHandler(req,res,next)).catch((err)=>next(err))
  }
 

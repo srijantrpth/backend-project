@@ -1,6 +1,7 @@
 // require('dotenv').config({path: './env'})  breaks the consistency of the code
 import dotenv from "dotenv"; // wont work without dotenv config and some changes in package.json like experimental feature
 import connectDB from "./db/index.js";
+import {app} from './app.js'
 dotenv.config({
   path: "./env",
 });
@@ -30,16 +31,17 @@ dotenv.config({
 
 // Due to Above Approach the index file gets polluted gets overwhelmed
 
-connectDB(() => {
+connectDB()
+.then(()=>{
+
+
   app.listen(process.env.PORT || 9000, () => {
+    
+    
     console.log(`Server is Running at port: ${process.env.PORT}`);
   
 });
-
-})
-  .then(
-  )
-  .catch((err) => {
+}).catch((err) => {
   
     console.log(`MongoDB Connection Failed!! ${err}`);
        process.exit(1) // access of process is given by nodeJS. whatever process our current application is running on it's reference is given by this.
