@@ -19,3 +19,10 @@ After running npm run dev if there is any issue connecting to DB such as with im
 We use app.use when doing some configuraitons or doing middleware settings        
 
 JWT is a Bearer Token
+
+Access and refresh tokens both are used as a part of modern practices otherwise only access would also work.
+
+Access token -> short lived, Refresh Token -> long lived
+
+
+Sometimes when we don't provide any response then we keep res as _ in (req, res, next) which would be (req, _, next)
