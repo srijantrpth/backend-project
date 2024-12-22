@@ -38,7 +38,7 @@ const videoSchema = Schema(
   { timestamps: true }
 );
 
-videoSchema.plugin(mongooseAggregatePaginate)
+videoSchema.plugin(mongooseAggregatePaginate) //  mongoose allows to inject plugins which helps to write mongodb aggregation pipelines separate package is installed for this mongoose-aggregate-paginate-v2
 
 
 export const Video = mongoose.model("Video", videoSchema);
