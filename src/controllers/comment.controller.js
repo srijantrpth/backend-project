@@ -101,13 +101,13 @@ const updatedComment = await Comment.findByIdAndUpdate(commentId, {
     $set: {
         content: commentText
     }
-})
+},{new: true})
 if(!updatedComment){
     throw new ApiError(400, "Failed to update comment")
 }
 
 return res.status(200).json(new ApiResponse(200, updatedComment, "Comment updated successfully"))
-);
+});
 
 const deleteComment = asyncHandler(async (req, res) => {
   const {commentId} = req.params;
