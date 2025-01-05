@@ -112,9 +112,7 @@ return res.status(200).json(new ApiResponse(200, updatedComment, "Comment update
 const deleteComment = asyncHandler(async (req, res) => {
   const {commentId} = req.params;
 
-  if(!mongoose.isValidObjectId(commentId)){
-      throw new ApiError(400, "Invalid comment ID")
-  }
+  
     const {_id} = req.user;
     const authCheck = await Comment.findOne({_id: commentId}).select("owner")
 
