@@ -8,9 +8,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const getAllVideos = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
-  if (!isValidObjectId(userId)) {
-    throw new ApiError(400, "userId is required");
-  }
+
   const videos = Video.aggregate([
     {
       $match: {
@@ -35,7 +33,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
       },
     },
     {
-      addFields: {
+      $addFields: {
         postedBy: {
           $arrayElemAt: ["$postedBy", 0],
         },
@@ -57,6 +55,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
     { $limit: parseInt(limit) },
     {$sort: {createdAt: 1}}
   ]);
+  return res.status(200).json(new ApiResponse(200, videos, "Videos fetched successfully! "));
 });
 
 const publishAVideo = asyncHandler(async (req, res) => {
