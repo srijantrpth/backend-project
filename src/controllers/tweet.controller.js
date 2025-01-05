@@ -62,6 +62,9 @@ const getUserTweets = asyncHandler(async (req, res) => {
         },
       },
     },
+    {
+      $unwind: "$twitter",
+    }
   ]);
   return res.status(200).json(new ApiResponse(200, tweets, "User tweets"));
 });

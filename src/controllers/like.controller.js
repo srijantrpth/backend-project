@@ -87,7 +87,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
     {
       $match:{
         likedBy: mongoose.Types.ObjectId(req.user._id),
-        video: {$exists: true}
+        video: {$exists: true, $ne: null}
       }
     }
   ])
@@ -97,5 +97,5 @@ const getLikedVideos = asyncHandler(async (req, res) => {
 
   return res.status(200, likedVideos[0], "Liked videos retrieved successfully");
 });
-
+// Check another approach for getLikedVideos in the file
 export { toggleCommentLike, toggleTweetLike, toggleVideoLike, getLikedVideos };
