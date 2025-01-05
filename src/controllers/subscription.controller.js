@@ -1,6 +1,6 @@
 import mongoose, {isValidObjectId} from "mongoose"
-import {User} from "../models/user.model.js"
-import { Subscription } from "../models/subscription.model.js"
+import {User} from "../models/user.models.js"
+import { Subscription } from "../models/subscription.models.js"
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
@@ -46,15 +46,18 @@ return res.status(200).json(new ApiResponse(200, count, "Subscribers Fetched Suc
 
 // controller to return channel list to which user has subscribed
 const getSubscribedChannels = asyncHandler(async (req, res) => {
-    const { subscriberId } = req.params
-    const subscribedChannels = await Subscription.countDocuments({subscriber: subscriberId},function(err,count){
-        if(!count){
-            throw new ApiError(400, "No subscribed channels found")
+    const { subscriberId } = req.params;
+    const subscribedChannelsCount = await Subscription.countDocuments({ subscriber: subscriberId }, function(err, count) {
+        if (err) {
+            throw new ApiError(500, "Error counting subscribed channels");
         }
-        return res.status(200).json(new ApiResponse(200, count, "Subscribed Channels Fetched Successfully!")) 
-            }
-    })
-})
+        if (!count) {
+            throw new ApiError(400, "No subscribed channels found");
+        }
+    });
+
+    return res.status(200).json(new ApiResponse(200, subscribedChannelsCount, "Subscribed Channels Fetched Successfully!"));
+});
 
 export {
     toggleSubscription,

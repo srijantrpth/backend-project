@@ -1,10 +1,13 @@
 // require('dotenv').config({path: './env'})  breaks the consistency of the code
 import dotenv from "dotenv"; // wont work without dotenv config and some changes in package.json like experimental feature
-import connectDB from "./db/index.js";
-import {app} from './app.js'
 dotenv.config({
   path: "./env",
 });
+
+import connectDB from "./db/index.js";
+import {app} from './app.js'
+
+
 
 // const app = express()
 // ;(async ()=>{ 
